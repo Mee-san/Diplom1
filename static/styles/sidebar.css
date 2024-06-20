@@ -1,0 +1,139 @@
+.sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 85vh; /* Ограниченная высота */
+    width: 200px;
+    background-color: rgba(244, 22, 107, 0.685);
+    transition: transform 0.3s ease, bottom 0.3s ease;
+    transform: translateX(-100%);
+    border-right: 2px solid #808080;
+    padding-top: 7%;
+    z-index: 3;
+    border-radius: 0 15px 15px 0;
+    overflow-y: auto; /* Прокрутка при переполнении */
+}
+
+.sidebar.visible {
+    transform: translateX(0);
+}
+
+.toggle-btn {
+    position: fixed;
+    top: 15vh;
+    left: 10px;
+    cursor: pointer;
+    background-color: #000000;
+    padding: 0.3%;
+    z-index: 5;
+}
+
+.toggle-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin-bottom: 5px;
+}
+
+.return-to-main-button,
+.return-to-dashboard-button,
+.return-to-genres-button,
+.return-to-news-button,
+.return-to-shop-button,
+.return-to-cart-button,
+.return-to-feedback-button {
+    position: fixed;
+    background-color: #dd1a68;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.return-to-main-button {
+    left: 50%;
+    bottom: 70vh;
+    transform: translateX(-50%);
+    z-index: 999;
+}
+
+.return-to-dashboard-button {
+    left: 50%;
+    bottom: 60vh;
+    transform: translateX(-50%);
+    z-index: 998;
+}
+
+.return-to-genres-button {
+    left: 50%;
+    bottom: 50vh;
+    transform: translateX(-50%);
+    z-index: 997;
+}
+
+.return-to-news-button {
+    left: 50%;
+    bottom: 40vh;
+    transform: translateX(-50%);
+    z-index: 996;
+}
+
+.return-to-shop-button {
+    left: 50%;
+    bottom: 30vh;
+    transform: translateX(-50%);
+    z-index: 995;
+}
+
+.return-to-cart-button {
+    left: 50%;
+    bottom: 20vh;
+    transform: translateX(-50%);
+    z-index: 994;
+}
+
+.return-to-feedback-button {
+    left: 50%;
+    bottom: 10vh;
+    transform: translateX(-50%);
+    z-index: 994;
+}
+
+.return-to-main-button:hover,
+.return-to-dashboard-button:hover,
+.return-to-genres-button:hover,
+.return-to-news-button:hover,
+.return-to-shop-button:hover,
+.return-to-cart-button:hover,
+.return-to-feedback-button:hover {
+    background-color: #2980b9;
+}
+
+.profile-container {
+    position: fixed; /* Измененно на фиксированное позиционирование */
+    top: 4vh; /* Отступ от верхнего края экрана */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5vh;
+    z-index: 997;
+}
+
+.profile-image {
+    width: 4vh;
+    height: 4vh;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    object-fit: cover;
+}
+
+.username {
+    color: white;
+    font-size: 2.0vh;
+    font-weight: bold;
+    text-align: center;
+}

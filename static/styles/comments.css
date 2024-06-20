@@ -1,0 +1,162 @@
+@media (min-width: 280px) {
+
+  body {
+      background-color: #000000e1;
+      /* замените "background.jpg" на путь к вашему заднему фону */
+      background-size: cover;
+      transform: scale(1);
+      /* Значение 1 означает 100% масштаб */
+      transform-origin: top center;
+      /* Устанавливает точку масштабирования в верхний левый угол */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+  }
+}
+
+p {
+  color: white;
+  background-color: #000000; /* Черный фон для надписей */
+  padding: 2%; /* Добавление отступов для улучшения читаемости */
+  border-radius: 5px; /* Сглаживание углов */
+}
+
+h2 {
+margin-bottom: 20px;
+color: white; /* Белый цвет текста */
+background-color: #000000;
+padding: 2%;
+border-radius: 5px; /* Сглаживание углов */
+}
+
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: white; /* Белый цвет текста */
+}
+
+
+/* Стилизация комментариев */
+.comment {
+  background-color: #000000; /* Черный фон */
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+  color: white; /* Белый цвет текста */
+}
+
+.comment p {
+  margin: 0;
+  color: white;
+}
+
+.comment p strong {
+  color: white;
+  margin-right: 5px;
+}
+
+/* Стилизация формы для добавления комментария */
+.comment-form {
+  margin-top: 20px;
+}
+
+.comment-form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.comment-form input[type="submit"] {
+  background-color: white; /* Белый цвет фона кнопки */
+  color: #ffffff; /* Черный цвет текста кнопки */
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.comment-form input[type="submit"]:hover {
+  background-color: #45a049;
+  color: white;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.comment-section {
+  margin-top: 100px;
+  margin-left: 1%;
+}
+
+.comment-section h2 {
+  padding: 10%;
+}
+
+.comment {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  width: 100%;
+}
+
+
+.makecomment {
+  margin-top: 2%;
+}
+
+.returnbutton {
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  user-select: none;
+}
+
+.news {
+  margin-top: 3%;
+}
+
+/* Стили для контейнера публикации */
+.news .image-container {
+  max-width: 800px; /* Максимальная ширина контейнера */
+  margin: 0 auto; /* Центрирование контейнера по горизонтали */
+  overflow: hidden; /* Обрезаем изображение, если оно превышает размеры контейнера */
+  border: 2px solid #ffffff; /* Рамка публикации белого цвета */
+  padding: 10px; /* Добавляем небольшие отступы вокруг контейнера */
+}
+
+/* Стили для изображения в контейнере публикации */
+.news .image-container img {
+  width: 100%; /* Занимает всю доступную ширину контейнера */
+  height: auto; /* Автоматически подстраиваем высоту для сохранения пропорций */
+  display: block; /* Убираем отступы по бокам от изображения */
+}
+
+.returnbutton:hover {
+  color: rgb(255, 255, 255);
+}
+
+.returnbutton a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(255, 255, 255);
+}
+
+a:visited {
+  color: rgb(255, 255, 255);
+}
+
+a:active {
+  color: rgb(255, 255, 255);
+}

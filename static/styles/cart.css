@@ -1,0 +1,212 @@
+/* styles/cart.css */
+/* Основной стиль для тела страницы */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: #FFFFFF;
+    transform: scale(1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-x: hidden; /* Добавим это свойство, чтобы скрыть горизонтальный скролл */
+}
+
+/* styles/cart.css */
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 5vh;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+header a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+main.cart-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #3d3737; /* Цвет фона корзины */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-items {
+    margin-top: 20px;
+}
+
+.cart-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    border-bottom: 2px solid #333;
+    font-weight: bold;
+    padding: 10px 0;
+    background-color: #363030; /* Цвет фона заголовка таблицы */
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    border-bottom: 1px solid #322d2d;
+    padding: 15px 0; /* Увеличиваем вертикальные отступы */
+}
+
+.cart-item-image img {
+    max-width: 50%;
+    height: auto;
+}
+
+.cart-item-info {
+    display: flex;
+    flex-direction: column; /* Изменяем на вертикальное расположение */
+}
+
+.cart-item-name {
+    font-size: 18px;
+    margin-bottom: 10px; /* Увеличиваем расстояние между названием и ценой */
+}
+
+.cart-item-price,
+.cart-item-total {
+    font-size: 16px;
+}
+
+.cart-item-quantity input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.cart-item-remove button {
+    background-color: #8e123b;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cart-item-remove button:hover {
+    background-color: #890c8b;
+}
+
+.cart-summary {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.feedback-link {
+    margin-top: 20px;
+    text-align: right;
+    color: #cd1b4a; /* Малиновый цвет */
+}
+
+.feedback-link a {
+    color: #cd1b4a; /* Малиновый цвет */
+    text-decoration: none;
+}
+
+.feedback-link a:hover {
+    text-decoration: underline; /* Подчеркивание при наведении */
+    color: rgb(243, 5, 5); /* Малиновый цвет */
+}
+
+footer {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 999; /* Устанавливаем z-index, если есть другие элементы с фиксированным позиционированием */
+}
+
+
+
+
+.top-bar {
+    background-image: url("../images/Jiyu.jpg");
+    background-size: cover; /* Изображение занимает всю доступную область */
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 7%;
+    width: 100%;
+    padding: 0%;
+    z-index: 3;
+}
+
+.tophat {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    background-color: #5B1A8E;
+    justify-content: space-between;
+    z-index: 3;
+}
+
+.tophat > div > button {
+    padding: 17px;
+    width: 250px;
+    height: 56px;
+    z-index: 3;
+}
+
+.tophat > li > a {
+    text-decoration: none;
+    text-align: center;
+    transition: 500ms;
+    display: flex;
+    width: 250px;
+    height: 56px;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--Color, #FFF);
+    font-size: 20px;
+    z-index: 3;
+}
+
+.tophat > a > img {
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    width: 215px;
+    height: 56px;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+}
+
+.tophat > a:hover {
+    color: rgb(242, 22, 143);
+    z-index: 3;
+}
+
+.Line {
+    width: 100vw;
+    height: 0px;
+    top: 7%;
+    position: fixed;
+    border: 2px white solid;
+    z-index: 2;
+}

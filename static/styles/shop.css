@@ -1,0 +1,245 @@
+:root {
+    --sizeindex: calc(1vw + 1vh);
+}
+
+/* Основной стиль для всех экранов */
+body {
+    background-color: #000000;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    transform: scale(1);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    color: white;
+}
+
+/* Контейнер для верхней панели */
+.top-bar {
+    background-image: url("../images/Jiyu.jpg");
+    background-size: cover; /* Изображение занимает всю доступную область */
+    background-position: center;
+    position: fixed;
+    width: 100%;
+    height: 8vh;
+    background-color: #000000;
+    padding: 0 2vw;
+    box-sizing: border-box;
+    z-index: 3;
+    position: relative;
+}
+
+.top-bar::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.2vh;
+    background-color: white;
+    z-index: 4;
+}
+
+.tophat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+    padding-left: 1vw; /* Изменили padding-left, чтобы сдвинуть элементы влево */
+    padding-right: 20vw; /* Добавили padding-right, чтобы создать пространство справа */
+}
+
+.Logo {
+    display: flex;
+    align-items: center;
+    margin: 2vh;
+    justify-content: flex-start;
+    z-index: 1;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-left: 2vw;
+    width: 100%;
+    z-index: 1;
+}
+
+.logo-link {
+    width: 30vw;
+    height: auto;
+    z-index: 1;
+}
+
+.logo-link img {
+    width: 15vw;
+    height: auto;
+    background-color: black;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 1vw;
+}
+
+
+/* Общий контейнер для всех блоков */
+.blocks-container {
+    margin-top: 6vh; /* Увеличен отступ сверху */
+}
+
+.main-p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2vh; /* Add some margin */
+}
+
+.conteiner-center {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column; /* Изменено направление на столбец */
+}
+
+.conteiner {
+    width: 60vw;
+    padding: 2vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 1vh;
+    box-shadow: 0 0 1vh rgba(0, 0, 0, 0.5);
+    margin: 1vh; /* Добавлено небольшое расстояние между контейнерами */
+}
+
+.conteiner img {
+    width: 100%;
+    height: auto;
+    border-radius: 1vh; /* Закругленные углы для изображения */
+    margin-bottom: 2vh; /* Расстояние между изображением и текстом */
+}
+
+.conteiner s {
+    text-decoration: none; /* Удалить перечеркивание */
+    color: #ffffff; /* Белый цвет для текста */
+    line-height: 1.6; /* Межстрочный интервал для лучшей читаемости */
+    font-style: italic; /* Добавить курсив */
+}
+
+/* Стиль для страницы категорий */
+.admin-buttons {
+    position: absolute;
+    right: 1vw;
+    top: 3vh;
+}
+
+.admin-buttons .add-button {
+    background-color: #ca0d5f;
+    color: white;
+    padding: 1vh;
+    text-decoration: none;
+    border-radius: 0.5vh;
+    margin-left: 1vw;
+}
+
+.categories-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2vh;
+}
+.category-panel {
+    position: relative;
+    width: 30vw; /* Ширина панели */
+    height: 20vh; /* Высота панели */
+    margin: 1vh;
+    overflow: hidden;
+    border-radius: 1vh;
+    box-shadow: 0 0.4vh 0.8vh rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Выравнивание контента по нижнему краю */
+    text-align: center;
+}
+
+.category-panel:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.8vh 1.6vh rgba(0, 0, 0, 0.2);
+}
+
+.category-panel a {
+    text-decoration: none;
+    color: white;
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.category-panel img {
+    width: 100%; /* Ширина изображения занимает всю ширину .category-panel */
+    height: auto; /* Автоматическое масштабирование высоты */
+    object-fit: cover; /* Обрезать изображение, сохраняя соотношение сторон */
+    object-position: center top; /* Позиция обрезанной части: центр сверху */
+    border-radius: 1vh;
+    pointer-events: none;
+}
+
+.category-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1vh;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+    z-index: 1;
+}
+
+.category-name {
+    font-size: 1.8vh;
+    font-weight: bold;
+    color: white; /* Белый цвет текста */
+}
+
+
+
+
+
+.profile-container {
+    text-align: center;
+    padding: 2vh;
+}
+
+.profile-image {
+    border-radius: 50%;
+    width: 10vh;
+    height: 10vh;
+}
+
+.username {
+    display: block;
+    margin-top: 1vh;
+    font-size: 1.8vh;
+    font-weight: bold;
+}
+
+.toggle-btn {
+    position: fixed;
+    top: 2vh;
+    left: 2vw;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.toggle-btn span {
+    display: block;
+    width: 2.5vw;
+    height: 0.3vh;
+    margin: 0.5vh;
+    background: #333;
+}

@@ -1,0 +1,271 @@
+body {
+    background-color: #000000;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    transform: scale(1);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    color: white;
+}
+
+h1, h2, h3, p, th, td, a {
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover, a:visited, a:active {
+    color: #ffffff;
+}
+
+.image {
+    max-width: 10vw; /* Примерное преобразование */
+    max-height: 10vh; /* Примерное преобразование */
+}
+
+/* Общие стили для текста */
+body, button, input, select, textarea {
+    color: #ffffff;
+}
+
+/* Стили для кнопок */
+button, input[type="submit"] {
+    background-color: #5B1A8E;
+    color: #ffffff;
+    border: none;
+    padding: 1vw 2vw; /* Примерное преобразование */
+    cursor: pointer;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #3C0F5D;
+}
+
+/* Дополнительные стили для кнопки "Добавить пользователя" */
+.users-section button[type="submit"] {
+    margin-top: 1vh; /* Примерное преобразование */
+}
+
+.add-user-button {
+    display: inline-block;
+    margin-top: 1vh; /* Примерное преобразование */
+    padding: 0.8vw 1.6vw; /* Примерное преобразование */
+    background-color: #5B1A8E;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.4vw; /* Примерное преобразование */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-user-button:hover {
+    background-color: #3C0F5D;
+}
+
+.container {
+    background-color: rgba(219, 112, 147, 0.4);
+    margin: 15vh auto 6vh; /* Увеличен отступ сверху */
+    padding: 2vw; /* Примерное преобразование */
+    border-radius: 1vw; /* Примерное преобразование */
+    width: 80%;
+    max-width: 1000px; /* Фиксированное значение */
+}
+
+form, table, ul {
+    margin-top: 3vh; /* Увеличен отступ сверху */
+}
+
+
+
+.top-bar {
+    background-image: url("../images/Jiyu.jpg");
+    background-size: cover; /* Изображение занимает всю доступную область */
+    background-position: center;
+    position: fixed;
+    width: 100%;
+    height: 8vh;
+    background-color: #000000;
+    padding: 0 2vw;
+    box-sizing: border-box;
+    z-index: 3;
+    position: relative;
+}
+
+.top-bar::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.2vh;
+    background-color: white;
+    z-index: 4;
+}
+
+.tophat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+    padding-left: 1vw; /* Изменили padding-left, чтобы сдвинуть элементы влево */
+    padding-right: 20vw; /* Добавили padding-right, чтобы создать пространство справа */
+}
+
+.Logo {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    justify-content: flex-start;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    width: 100%;
+}
+
+.logo-link {
+    width: 300px;
+    height: auto;
+}
+
+.logo-link img {
+    width: 250px;
+    height: auto;
+    background-color: black;
+}
+
+.Line {
+    width: 100vw;
+    height: 0;
+    top: 15vh; /* Примерное преобразование */
+    position: fixed;
+    border: 0.2vw solid white; /* Примерное преобразование */
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .tophat > div > button, .tophat > li > a {
+        width: auto;
+        padding: 1vw; /* Примерное преобразование */
+        font-size: 1.6vw; /* Примерное преобразование */
+    }
+
+    .Logo {
+        width: 10vw; /* Примерное преобразование */
+        height: auto;
+    }
+
+    .container, section {
+        width: 90%; /* Уменьшаем ширину контейнеров на мобильных устройствах */
+    }
+
+    .image {
+        max-width: 100%; /* Устанавливаем максимальную ширину изображений для лучшего адаптирования */
+        height: auto;
+    }
+
+    ul li,
+    th,
+    td {
+        padding: 1vh; /* Примерное преобразование */
+    }
+}
+
+@media (max-width: 480px) {
+    .tophat {
+        flex-direction: column;
+        padding: 1vh; /* Примерное преобразование */
+    }
+
+    .tophat > div > button, .tophat > li > a {
+        width: 100%;
+        padding: 1vh 0; /* Примерное преобразование */
+        text-align: center;
+    }
+
+    .top-bar {
+        height: auto;
+        padding: 1vh; /* Примерное преобразование */
+    }
+
+    .Logo {
+        width: 10vw; /* Примерное преобразование */
+        height: auto;
+    }
+
+    .container, section {
+        width: 100%;
+    }
+
+    .image {
+        max-width: 10vw; /* Примерное преобразование */
+        max-height: 10vh; /* Примерное преобразование */
+    }
+
+    ul li,
+    th,
+    td {
+        padding: 1vh; /* Примерное преобразование */
+    }
+}
+
+ul {
+    margin-top: 3vh; /* Увеличен отступ сверху */
+    padding: 0;
+    list-style: none;
+}
+
+ul li {
+    padding: 1vh; /* Примерное преобразование */
+    border-bottom: 0.1vh solid rgba(255, 255, 255, 0.2); /* Примерное преобразование */
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+table {
+    margin-top: 3vh; /* Увеличен отступ сверху */
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1vh; /* Примерное преобразование */
+    border-bottom: 0.1vh solid rgba(255, 255, 255, 0.2); /* Примерное преобразование */
+}
+
+th:last-child, td:last-child {
+    border-right: none;
+}
+
+tr:last-child th, tr:last-child td {
+    border-bottom: none;
+}
+
+:root {
+    --sizeindex: calc(1vw + 1vh);
+}
+
+.admin-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: -15vh;
+    background-color: #c7043e;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.admin-link:hover {
+    background-color: #0056b3;
+}

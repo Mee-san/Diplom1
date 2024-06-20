@@ -1,0 +1,353 @@
+:root {
+    --sizeindex: calc(1vw + 1vh);
+}
+
+/* Основной стиль для всех экранов */
+body {
+    background-color: #000000;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    transform: scale(1);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    color: white;
+}
+
+/* Контейнер для верхней панели */
+.top-bar {
+    background-image: url("../images/Jiyu.jpg");
+    background-size: cover; /* Изображение занимает всю доступную область */
+    background-position: center;
+    position: fixed;
+    width: 100%;
+    height: 8vh;
+    background-color: #000000;
+    padding: 0 2vw;
+    box-sizing: border-box;
+    z-index: 3;
+    position: relative;
+}
+
+.top-bar::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.2vh;
+    background-color: white;
+    z-index: 4;
+}
+
+.tophat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+    padding-left: 1vw; /* Изменили padding-left, чтобы сдвинуть элементы влево */
+    padding-right: 20vw; /* Добавили padding-right, чтобы создать пространство справа */
+}
+
+.Logo {
+    display: flex;
+    align-items: center;
+    margin: 2vh;
+    justify-content: flex-start;
+    z-index: 1;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-left: 2vw;
+    width: 100%;
+    z-index: 1;
+}
+
+.logo-link {
+    width: 30vw;
+    height: auto;
+    z-index: 1;
+}
+
+.logo-link img {
+    width: 15vw;
+    height: auto;
+    background-color: black;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 1vw; /* 10px заменено на vw */
+}
+
+/* Контейнеры для адаптивного размещения */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2vh; /* 20px заменено на vh */
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+a.login {
+    font-size: 8vh; /* 40px заменено на vh */
+}
+
+p {
+    display: flex;
+    padding-inline: 3vh; /* 30px заменено на vh */
+    text-align: center;
+    font-size: 2vh; /* 40px заменено на vh */
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: rgb(255, 255, 255);
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh; /* Adjust height as needed */
+    text-align: center;
+    color: white;
+}
+
+/* Добавим в styles/style.css */
+.news-sidebar {
+    position: fixed;
+    right: 0;
+    top: 8vh; /* Below the top bar */
+    width: 20vw; /* Adjust width as needed */
+    padding: 1vh;
+    background-color: rgba(28, 27, 27, 0.8);
+    color: white;
+    overflow-y: auto;
+    max-height: 92vh; /* To ensure it doesn't go below the footer */
+    border-radius: 3vh; /* Adjust the radius as needed */
+    margin-top: 10vh;
+}
+
+.news-sidebar h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.news-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.news-sidebar li {
+    margin-bottom: 1vh;
+}
+
+.news-image-container {
+    width: 100%;
+    height: 150px; /* Set the desired height */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.news-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures the image is fully visible within the container */
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 1vh;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Выравниваем контент по верхнему краю */
+    padding: 2vh;
+    box-sizing: border-box;
+}
+
+.main-content-left {
+    width: 70%; /* Ширина основного контента */
+    margin-right: 3vw; /* Отступ между основным контентом и сайдбаром */
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Выравнивание текста по левому краю */
+    text-align: left; /* Выравнивание текста по левому краю */
+    color: white;
+    padding: 2vh;
+    box-sizing: border-box;
+    width: 100%; /* Занимает всю доступную ширину внутри .main-content-left */
+}
+
+.welcome-message {
+    font-size: 4vh;
+    margin-bottom: 2vh;
+    margin-left: 5vw; 
+}
+
+.intro-text {
+    font-size: 2.5vh;
+    margin-bottom: 2vh;
+}
+
+.features-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 2vh;
+}
+
+.features-list li {
+    font-size: 2.5vh;
+    margin-bottom: 1vh;
+}
+
+.cta-text {
+    font-size: 2.5vh;
+}
+
+.cta-text a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.cta-text a:hover {
+    text-decoration: none;
+}
+
+
+
+/* Адаптивные стили */
+@media (max-width: 1024px) {
+    .tophat {
+        padding-right: 5vw;
+    }
+
+    .logo-link {
+        width: 25vw;
+    }
+
+    .logo-link img {
+        width: 12vw;
+    }
+
+    .main-content {
+        height: auto;
+    }
+
+    .news-sidebar {
+        width: 25vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .tophat {
+        padding-right: 2vw;
+    }
+
+    .logo-link {
+        width: 20vw;
+    }
+
+    .logo-link img {
+        width: 10vw;
+    }
+
+    .news-sidebar {
+        width: 30vw;
+    }
+
+    .main-content {
+        width: 90%;
+    }
+
+    .welcome-message {
+        font-size: 3.5vh;
+    }
+
+    .intro-text,
+    .features-list li,
+    .cta-text {
+        font-size: 2vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .tophat {
+        padding-right: 1vw;
+    }
+
+    .logo-link {
+        width: 15vw;
+    }
+
+    .logo-link img {
+        width: 8vw;
+    }
+
+    .news-sidebar {
+        width: 100vw;
+        top: auto;
+        bottom: 0;
+        height: 50vh; /* Adjust as needed */
+        border-radius: 3vh 3vh 0 0;
+    }
+
+    .main-content {
+        height: auto;
+        padding: 5vh 2vh;
+    }
+
+    .profile-image {
+        width: 3vh;
+        height: 3vh;
+    }
+
+    .username {
+        font-size: 1.2vh;
+    }
+
+    .welcome-message {
+        font-size: 3vh;
+    }
+
+    .intro-text,
+    .features-list li,
+    .cta-text {
+        font-size: 1.8vh;
+    }
+}

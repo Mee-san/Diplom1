@@ -1,0 +1,269 @@
+body {
+    background-color: #000000;
+    background-size: cover;
+    transform: scale(1);
+    transform-origin: top center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-size: 16px; /* базовый размер шрифта */
+}
+
+h1 {
+    color: #ffffff;
+    margin-top: 5%;
+}
+
+.avatar-container {
+    margin-top: 20px;
+    border-radius: 50%;
+}
+
+img.avatar {
+    width: 350px; /* фиксированный размер для изображения */
+    height: 350px;
+    border-radius: 5%;
+    object-fit: cover;
+}
+
+.user-info {
+    text-align: center; /* изменено на центрирование */
+    margin: 20px;
+}
+
+
+  .logout-button {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    background-color: #dd1a68;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+
+  .content {
+    margin-right: 10%;
+    text-align: center;
+    margin-top: 9%;
+  }
+
+  .avatar-form {
+    margin-top: 20px;
+    border-radius: 50%;
+  }
+
+  .upload-avatar-button {
+    background-color: #dd1a68;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .upload-avatar-button:hover {
+    background-color: #2980b9;
+  }
+  .admin-panel-button{
+    background-color: #dd1a68;
+    color: #fff;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  .admin-panel-button:hover {
+    background-color: #2980b9;
+  }
+
+a {
+    display: block;
+    text-decoration: none;
+    color: rgba(244, 22, 107, 0.685);
+}
+
+p {
+    display: flex;
+    margin-bottom: 15%;
+    text-align: center;
+    font-size: 40px;
+    font-style: "normal";
+    font-weight: 400;
+    line-height: normal;
+    color: rgb(255, 255, 255);
+}
+
+
+.Line {
+    width: 100vw;
+    height: 0px;
+    top: 7%;
+    position: fixed;
+    border: 2px white solid;
+    z-index: 2;
+}
+
+
+.effect {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.091);
+}
+
+
+
+/* Список групп */
+
+
+/* расположение текста */
+
+.top-bar {
+    background-image: url("../images/Jiyu1.jpg");
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 7%;
+    width: 100%;
+    padding: 0%;
+    z-index: 2;
+}
+
+.tophat {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    background-color: #5B1A8E;
+    justify-content: space-between;
+    z-index: 2;
+
+}
+
+.tophat>div>button {
+    padding: 17px;
+    width: 250px;
+    height: 56px;
+    z-index: 3;
+}
+
+.tophat>li>a {
+    text-decoration: none;
+    text-align: center;
+    transition: 500ms;
+    display: flex;
+    width: 250px;
+    height: 56px;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--Color, #FFF);
+    font-size: 20px;
+    z-index: 3;
+}
+
+.tophat>a>img {
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    width: 215px;
+    height: 56px;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+}
+
+.tophat>a:hover {
+    color: rgb(242, 22, 143);
+    z-index: 3;
+}
+
+
+s {
+    display: flex;
+    padding-inline: 30px;
+    padding-bottom: 15px;
+    text-align: center;
+    font-size: 25px;
+    font-style: "normal";
+    font-weight: 400;
+    line-height: normal;
+    color: rgba(248, 25, 110, 0.685);
+    text-decoration: none;
+}
+
+label{
+    color: #ffffff;
+}
+
+
+@media (max-width: 768px) {
+    .block-center,
+    .block-cab {
+        left: 5%; /* адаптивное положение блоков */
+    }
+
+    .cabblock,
+    .block {
+        width: 90%; /* уменьшение ширины блоков на мобильных устройствах */
+    }
+
+    .block > img,
+    .cabblock > img {
+        width: 15%; /* уменьшение размера изображений в блоках */
+    }
+
+    p {
+        font-size: 18px; /* уменьшение размера текста */
+    }
+
+    .logout-button,
+    .upload-avatar-button,
+    .admin-panel-button {
+        font-size: 14px; /* уменьшение размера кнопок */
+    }
+
+    img.avatar {
+        width: 250px; /* изменение размера аватара */
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .block-center,
+    .block-cab {
+        left: 2%; /* еще более адаптивное положение блоков */
+    }
+
+    .block,
+    .cabblock {
+        width: 100%; /* полная ширина блоков на самых узких экранах */
+        margin: 10px 0; /* уменьшение отступов */
+    }
+
+    .block > img,
+    .cabblock > img {
+        width: 12%; /* уменьшение размера изображений еще больше */
+    }
+
+    .user-info {
+        margin: 10px;
+    }
+
+    img.avatar {
+        width: 200px; /* изменение размера аватара для маленьких экранов */
+        height: 200px;
+    }
+}

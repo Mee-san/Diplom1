@@ -1,0 +1,71 @@
+.main-p{
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .players {
+    width: 100%; /* Установить ширину на 100% */
+    max-width: 800px; /* Опционально: ограничить максимальную ширину */
+    background-color: black;
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+    background-color: rgba(0, 0, 0, 0.808);
+    border: 3px solid;
+    border-radius: 5px;
+    border-color: #5c1a8e71;
+    margin: 20px;
+}
+  
+  #myAudio{
+    margin-right: 3%;
+    margin-left: auto;
+  }
+  
+  .players > s {
+    display: flex; /* Добавляем */
+    align-items: center; /* Добавляем */
+    padding-top: 1%;
+    padding-bottom: 1%;
+    font-size: 25px;
+    margin-right: 60px;
+    padding-left: 50px;
+    justify-content: left;
+    text-decoration: none; 
+}
+  
+audio {
+  width: 100%;
+  margin-top: 20px; /* добавляем отступ сверху */
+}
+
+  
+    /* описание исполнителей */
+  
+  .description{
+    margin-top: 50px;
+    margin-bottom: 0px;
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: rgba(248, 25, 110, 0.685);
+    border: 3px solid;
+    border-radius: 5px;
+    border-color: rgba(76, 46, 98, 0.443);
+  }
+  
+  .description > s {
+    text-align: justify;
+    font-size: 26px;
+    text-decoration: none; /* Убираем перечеркивание текста */
+}
+   
+.audio {
+  width: 100%; /* Установить ширину на 100% */
+  max-width: 600px; /* Опционально: ограничить максимальную ширину */
+  padding: 10px;
+}
+  .error {
+    color: rgb(232, 224, 224);
+  }
+  
+      /* описание исполнителей */

@@ -1,0 +1,150 @@
+/* Основной стиль для всех экранов */
+body {
+    
+    background-color: #000000;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    transform: scale(1);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    color: white;
+}
+
+/* Контейнер для верхней панели */
+.top-bar {
+    background-image: url("../images/Jiyu.jpg");
+    background-size: cover; /* Изображение занимает всю доступную область */
+    background-position: center;
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    background-color: #000000;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 3;
+    position: relative;
+}
+
+.top-bar::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    z-index: 4;
+}
+
+.tophat {
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding-left: 10px; /* Изменили padding-left, чтобы сдвинуть элементы влево */
+    padding-right: 200px; /* Добавили padding-right, чтобы создать пространство справа */
+}
+
+.Logo {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    justify-content: flex-start;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    width: 100%;
+}
+
+.logo-link {
+    width: 300px;
+    height: auto;
+}
+
+.logo-link img {
+    width: 250px;
+    height: auto;
+    background-color: black;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+#contextMenu a, #genreMenu a {
+    display: block;
+    padding: 10px;
+    color: white; /* Белый цвет текста */
+    text-decoration: none;
+}
+
+#contextMenu a:hover, #genreMenu a:hover {
+    background-color: #f5f5f5; /* Изменение цвета фона при наведении */
+    color: black; /* Черный цвет текста при наведении */
+}
+
+/* Общий контейнер для всех блоков */
+.blocks-container {
+    margin-top: 60px; /* Увеличен отступ сверху */
+}
+
+.main-p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px; /* Add some margin */
+}
+.conteiner p {
+    align-items: center;
+    font-size: larger;
+}
+
+.article-item h3 {
+    align-items: center;
+    font-size: larger;
+}
+
+.article-content {
+    align-items: center;
+    font-size: larger;
+}
+
+.conteiner-center {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column; /* Изменено направление на столбец */
+}
+
+.conteiner {
+    width: 600px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin: 10px; /* Добавлено небольшое расстояние между контейнерами */
+}
+
+.conteiner img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Закругленные углы для изображения */
+    margin-bottom: 20px; /* Расстояние между изображением и текстом */
+}
+
+.conteiner s {
+    text-decoration: none; /* Удалить перечеркивание */
+    color: #ffffff; /* Белый цвет для текста */
+    line-height: 1.6; /* Межстрочный интервал для лучшей читаемости */
+    font-style: italic; /* Добавить курсив */
+}

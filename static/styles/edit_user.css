@@ -1,0 +1,162 @@
+@media (min-width: 280px) {
+    body {
+        background-color: black;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    .block-cab {
+        width: 90%; /* Изменяем ширину блока на 90% ширины экрана */
+    }
+}
+
+
+.top-bar {
+    background-image: url("../images/Jiyu.jpg");
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 7%;
+    width: 100%;
+    padding: 0%;
+    z-index: 3;
+}
+
+.tophat {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    background-color: #5B1A8E;
+    justify-content: space-between;
+    z-index: 3;
+
+}
+
+.tophat>div>button {
+    padding: 17px;
+    width: 250px;
+    height: 56px;
+    z-index: 3;
+}
+
+.tophat>li>a {
+    text-decoration: none;
+    text-align: center;
+    transition: 500ms;
+    display: flex;
+    width: 250px;
+    height: 56px;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--Color, #FFF);
+    font-size: 20px;
+    z-index: 3;
+}
+
+.tophat>a>img {
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    width: 215px;
+    height: 56px;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 3;
+}
+
+.tophat>a:hover {
+    color: rgb(242, 22, 143);
+    z-index: 3;
+}
+
+.Logo {
+    background-color: #000000;
+    position: fixed;
+    width: 250px;
+    height: 150px;
+    right: 5%;
+    top: 8%;
+    display: flex;
+    object-fit: cover;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.Line {
+    width: 100vw;
+    height: 0px;
+    top: 7%;
+    position: fixed;
+    border: 2px white solid;
+    z-index: 2;
+}
+.block-cab {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    text-align: center;
+    padding-inline: 10%;
+    z-index: 2;
+}
+
+
+
+.cabblock>img {
+    float: left;
+    width: 18%;
+    flex: 0 0 auto;
+    border-right: 3px solid;
+    border-radius: 1px;
+    border-color: #5c1a8e71;
+    object-fit: fill;
+    z-index: 2;
+
+}
+
+.cabblock>p {
+    flex: 1;
+    margin-top: 0%;
+    padding-top: 10px;
+    text-align: justify;
+    font-size: 18px;
+    z-index: 2;
+}
+
+.cabblock {
+    display: inline-block;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.855);
+    border: 2px solid;
+    border-radius: 40px;
+    padding: 15px;
+    border-color: #5c1a8e71;
+    margin: 20px;
+    z-index: 2;
+    color: white; /* добавляем белый цвет текста */
+    padding: 15px 10px; /* Уменьшаем отступы внутри блока */
+    margin: 20px auto; /* Центрируем блок на странице */
+}
+
+.cabblock>h1 {
+    color: rgb(255, 255, 255);
+}
+
+.cabblock label {
+    color: white; /* добавляем белый цвет текста */
+    margin-right: 90%;
+    margin-top: 5%;
+}
+
+.cabblock input {
+    margin-right: 50%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    color: black; /* если вы хотите, чтобы текст в поле ввода был черным */
+}
