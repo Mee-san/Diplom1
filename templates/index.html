@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jiyū no kikai</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sidebar.css') }}">
+    <script src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
+</head>
+<body>
+    <div class="top-bar">
+        <nav class="tophat">
+            <div class="Logo">
+                <div class="logo-container">
+                    <a href="{{ url_for('index') }}" class="logo-link">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div> 
+    <div class="sidebar">
+        <div class="profile-container">
+            {% if current_user.is_authenticated %}
+                {% if current_user.avatar %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar" class="avatar">
+                {% else %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar" class="avatar">
+                {% endif %}
+                <span class="username">{{ current_user.username }}</span>
+            {% else %}
+                <a href="{{ url_for('login') }}">Войти</a>
+            {% endif %}
+        </div>
+
+        <div class="return-to-main-container">
+            <button onclick="returnToMainPage()" class="return-to-main-button">На главную</button>
+        </div>
+        <div class="return-to-dashboard-container">
+            <button onclick="returnToDashboard()" class="return-to-dashboard-button">Вернуться в личный кабинет</button>
+        </div>
+        <div class="return-to-genres-container">
+            <button onclick="returnToGenres()" class="return-to-genres-button">Жанры</button>
+        </div>
+        <div class="return-to-news-container">
+            <button onclick="returnToNews()" class="return-to-news-button">Форум</button>
+        </div>
+        <div class="return-to-shop-container">
+            <button onclick="returnToShop()" class="return-to-shop-button">Магазин</button>
+        </div>
+        <div class="return-to-cart-container">
+            <button onclick="returnToCart()" class="return-to-cart-button">Корзина</button>
+        </div>
+        <div class="return-to-feedback-container">
+            <button onclick="openFeedback()" class="return-to-feedback-button">Обратная связь</button>
+        </div>
+    </div>
+
+    <div class="toggle-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="main-content-left">
+            <div class="main-content">
+                <h1 class="welcome-message">Добро пожаловать на Jiyū no Kikai</h1>
+                <p class="intro-text">
+                    Jiyū no Kikai – это место, где поклонники музыки жанра рок могут объединиться, чтобы делиться своими увлечениями и узнавать о новых для себя группах. На нашем сайте вы найдете множество интересных разделов:
+                </p>
+                <ul class="features-list">
+                    <li><strong>Форум:</strong> Присоединяйтесь к нашим обсуждениям на форуме, где можно обмениваться мнениями, делиться новостями и задавать вопросы.</li>
+                    <li><strong>Биографии групп:</strong> Узнайте больше о своих любимых музыкальных группах, прочитав их биографии.</li>
+                    <li><strong>Магазин:</strong> Также можете посмотреть для себя наш магазин.</li>
+                </ul>
+                <p class="cta-text">
+                    Присоединяйтесь к нам сегодня и станьте частью нашего сообщества! Если у вас есть вопросы или предложения, не стесняйтесь обращаться к нам через раздел <a href="/feedback">обратной связи</a>.
+                </p>
+            </div>
+        </div>
+    
+
+    <div class="news-sidebar">
+        <h2>Случайные публикации</h2>
+        <ul>
+            {% for news in random_news %}
+                <li>
+                    <h3>{{ news.title }}</h3>
+                    <div class="news-image-container">
+                        {% if news.image_path %}
+                            <img src="{{ url_for('static', filename=news.image_path) }}" alt="{{ news.title }}" class="news-image">
+                        {% else %}
+                            <p>Обсуждение</p>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <footer>
+        <p>Обратная связь: <a href="mailto:omisantakurose@gmail.com">omisantakurose@gmail.com</a></p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='scripts/context-menu.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/genre-menu.js') }}"></script>
+</body>
+</html>

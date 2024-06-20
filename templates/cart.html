@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/cart.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sidebar.css') }}">
+    <script src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <nav class="tophat">
+                <div class="Line"></div>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="sidebar">
+        <div class="profile-container">
+            {% if current_user.is_authenticated %}
+                {% if current_user.avatar %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar">
+                {% else %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar">
+                {% endif %}
+                <span class="username">{{ current_user.username }}</span>
+            {% else %}
+                <a href="{{ url_for('login') }}">Войти</a>
+            {% endif %}
+        </div>
+        
+        <div class="return-to-main-container">
+            <button onclick="returnToMainPage()" class="return-to-main-button">На главную</button>
+        </div>
+        <div class="return-to-dashboard-container">
+            <button onclick="returnToDashboard()" class="return-to-dashboard-button">Вернуться в личный кабинет</button>
+        </div>
+        <div class="return-to-genres-container">
+            <button onclick="returnToGenres()" class="return-to-genres-button">Жанры</button>
+        </div>
+        <div class="return-to-news-container">
+            <button onclick="returnToNews()" class="return-to-news-button">Форум</button>
+        </div>
+        <div class="return-to-shop-container">
+            <button onclick="returnToShop()" class="return-to-shop-button">Магазин</button>
+        </div>
+    
+        <div class="return-to-cart-container">
+          <button onclick="returnToCart()" class="return-to-cart-button">Корзина</button>
+      </div>
+    
+        <div class="return-to-feedback-container">
+            <button onclick="openFeedback()" class="return-to-feedback-button">Обратная связь</button>
+        </div>
+    </div>
+    
+    <div class="toggle-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <header>
+        <h1>Корзина покупок</h1>
+        <p>Здесь вы можете просмотреть товары, добавленные в вашу корзину.</p>
+        <p>Для возврата к покупкам, перейдите <a href="{{ url_for('shop') }}">сюда</a>.</p>
+    </header>
+
+    <main class="cart-container">
+        <h2>Привет, {{ current_user.username }}!</h2>
+        
+        <div class="cart-items">
+            <div class="cart-header">
+                <div>Товар</div>
+            </div>
+            {% for item in cart_items %}
+                <div class="cart-item">
+                    <div class="cart-item-image">
+                        <img src="{{ url_for('static', filename=item.product.image_path) }}" alt="{{ item.product.name }}">
+                    </div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">{{ item.product.name }}</div>
+                        <div class="cart-item-price">{{ item.product.price }} руб.</div>
+                        <div class="cart-item-quantity">
+                            <form action="{{ url_for('update_cart', cart_item_id=item.id) }}" method="POST">
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="10">
+                                <button type="submit">Обновить</button>
+                            </form>
+                        </div>
+                        <div class="cart-item-total">{{ item.product.price * item.quantity }} руб.</div>
+                        <div class="cart-item-remove">
+                            <form action="{{ url_for('remove_from_cart', cart_item_id=item.id) }}" method="POST">
+                                <button type="submit">Удалить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="cart-summary">
+            <div>Общая сумма: {{ total_price }} руб.</div>
+        </div>
+
+        <div class="checkout-button">
+            <form action="{{ url_for('checkout') }}" method="POST">
+                <button type="submit">Оформить заказ</button>
+            </form>
+        </div>
+
+        <div class="feedback-link">
+            <a href="{{ url_for('feedback') }}">Связаться с нами</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Jiyu no Kikai. Все права защищены.</p>
+    </footer>
+</body>
+</html>

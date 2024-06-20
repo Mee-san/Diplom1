@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/heavy.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sidebar.css') }}">
+    <script src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
+    <title>{{ genre.name }}</title>
+</head>
+
+<style>
+
+    .btn {
+        display: inline-block;
+        padding: 15px 30px; /* Увеличенные отступы */
+        margin: 20px 10px;  /* Увеличенные отступы */
+        font-size: 18px;    /* Увеличенный размер шрифта */
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    
+    /* Стили для кнопки "Добавить группу" */
+    .add-group-btn {
+        background-color: #eb065e; /* синий */
+    }
+
+    .add-group-btn:hover {
+        background-color: #0056b3; /* темнее синий */
+    }
+
+    /* Стили для контейнера кнопок */
+    .button-container {
+        display: flex;
+        justify-content: center; /* Выравнивание по центру */
+        margin: 20px 0;          /* Отступы сверху и снизу */
+    }
+
+</style>
+<body>
+    <div class="top-bar">
+        <nav class="tophat">
+            <div class="Logo">
+                <div class="logo-container">
+                    <a href="{{ url_for('index') }}" class="logo-link">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div> 
+    <div class="sidebar">
+        <div class="profile-container">
+            {% if current_user.is_authenticated %}
+                {% if current_user.avatar %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar" class="avatar">
+                {% else %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar" class="avatar">
+                {% endif %}
+                <span class="username">{{ current_user.username }}</span>
+            {% else %}
+                <a href="{{ url_for('login') }}">Войти</a>
+            {% endif %}
+        </div>
+
+        <div class="return-to-main-container">
+            <button onclick="returnToMainPage()" class="return-to-main-button">На главную</button>
+        </div>
+        <div class="return-to-dashboard-container">
+            <button onclick="returnToDashboard()" class="return-to-dashboard-button">Вернуться в личный кабинет</button>
+        </div>
+        <div class="return-to-genres-container">
+            <button onclick="returnToGenres()" class="return-to-genres-button">Жанры</button>
+        </div>
+        <div class="return-to-news-container">
+            <button onclick="returnToNews()" class="return-to-news-button">Форум</button>
+        </div>
+        <div class="return-to-shop-container">
+            <button onclick="returnToShop()" class="return-to-shop-button">Магазин</button>
+        </div>
+        <div class="return-to-cart-container">
+            <button onclick="returnToCart()" class="return-to-cart-button">Корзина</button>
+        </div>
+        <div class="return-to-feedback-container">
+            <button onclick="openFeedback()" class="return-to-feedback-button">Обратная связь</button>
+        </div>
+    </div>
+
+    <div class="toggle-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    {% if current_user.is_admin %}
+        <a href="/add_group" class="btn add-group-btn">Добавить группу</a>
+    {% endif %}
+
+
+    <div class="search-container">
+        <form method="post" action="{{ url_for('search_genre', genre_id=genre.id) }}">
+            <input type="text" name="search_group" placeholder="Поиск групп">
+            <button type="submit">Искать</button>
+        </form>
+    </div>
+
+    <h1>{{ genre.name }}</h1>
+    <div class="block-center">
+        {% for group in groups %}
+        <div class="block">
+            <p>{{ group.name }}</p>
+            {% if group.image_path %}
+                <img class="image" src="{{ url_for('static', filename=group.image_path) }}" alt="{{ group.name }}">
+            {% endif %}
+            <p>{{ group.description }}</p>
+            <a href="{{ url_for('group_details', group_id=group.id) }}">Подробнее</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!-- feedback.html -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/feedback.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sidebar.css') }}">
+    <script src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
+
+
+    <title>Обратная связь</title>
+</head>
+<body>
+
+    <header>
+        <div class="top-bar">
+            <nav class="tophat">
+                <div class="Line"></div>
+            </nav>
+        </div>
+    </header>
+    <div class="sidebar">
+        <div class="profile-container">
+            {% if current_user.is_authenticated %}
+                {% if current_user.avatar %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar" class="avatar">
+                {% else %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar" class="avatar">
+                {% endif %}
+                <span class="username">{{ current_user.username }}</span>
+            {% else %}
+                <a href="{{ url_for('login') }}">Войти</a>
+            {% endif %}
+        </div>
+
+        <div class="return-to-main-container">
+            <button onclick="returnToMainPage()" class="return-to-main-button">На главную</button>
+        </div>
+        <div class="return-to-dashboard-container">
+            <button onclick="returnToDashboard()" class="return-to-dashboard-button">Вернуться в личный кабинет</button>
+        </div>
+        <div class="return-to-genres-container">
+            <button onclick="returnToGenres()" class="return-to-genres-button">Жанры</button>
+        </div>
+        <div class="return-to-news-container">
+            <button onclick="returnToNews()" class="return-to-news-button">Форум</button>
+        </div>
+        <div class="return-to-shop-container">
+            <button onclick="returnToShop()" class="return-to-shop-button">Магазин</button>
+        </div>
+    
+        <div class="return-to-cart-container">
+          <button onclick="returnToCart()" class="return-to-cart-button">Корзина</button>
+      </div>
+    
+        <div class="return-to-feedback-container">
+            <button onclick="openFeedback()" class="return-to-feedback-button">Обратная связь</button>
+        </div>
+    
+    </div>
+
+    
+    
+    <div class="toggle-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <h1>Обратная связь</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.name.label }}<br>
+            {{ form.name(size=32) }}<br>
+            {% for error in form.name.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.email.label }}<br>
+            {{ form.email(size=64) }}<br>
+            {% for error in form.email.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.message.label }}<br>
+            {{ form.message(cols=60, rows=10) }}<br>
+            {% for error in form.message.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.submit }}
+        </div>
+    </form>
+    <p class="feedbackmail">Обратная связь: <a href="mailto:omisantakurose@gmail.com">omisantakurose@gmail.com</a></p>
+
+    <footer>
+        <div class="map-container">
+            <iframe src="https://yandex.ru/map-widget/v1/-/CCUH-IG3zA?lang=ru_RU&ll=131.941305%2C43.118428&size=450%2C400&z=16&l=map&pt=131.941305%2C43.118428&scale=1" width="100%" height="400" frameborder="0" allowfullscreen="true"></iframe>
+            <p class="map-caption">Расположение нашей организации!</p>
+        </div>
+
+    </footer>
+    
+
+    
+</body>
+</html>

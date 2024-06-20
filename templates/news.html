@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форум</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/news.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/sidebar.css') }}">
+</head>
+<body>
+<div class="top-bar">
+    <nav class="tophat">
+    </nav>
+</div>
+
+<div class="sidebar">
+    <div class="profile-container">
+        {% if current_user.is_authenticated %}
+            {% if current_user.avatar %}
+                <img class="profile-image" src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar" class="avatar">
+            {% else %}
+                <img class="profile-image" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar" class="avatar">
+            {% endif %}
+            <span class="username">{{ current_user.username }}</span>
+        {% else %}
+            <a href="{{ url_for('login') }}">Войти</a>
+        {% endif %}
+    </div>
+    
+    <!-- Кнопки в боковой панели -->
+    <div class="return-to-main-container">
+        <button onclick="returnToMainPage()" class="return-to-main-button">На главную</button>
+    </div>
+    <div class="return-to-dashboard-container">
+        <button onclick="returnToDashboard()" class="return-to-dashboard-button">Вернуться в личный кабинет</button>
+    </div>
+    <div class="return-to-genres-container">
+        <button onclick="returnToGenres()" class="return-to-genres-button">Жанры</button>
+    </div>
+    <div class="return-to-news-container">
+        <button onclick="returnToNews()" class="return-to-news-button">Форум</button>
+    </div>
+    <div class="return-to-shop-container">
+        <button onclick="returnToShop()" class="return-to-shop-button">Магазин</button>
+    </div>
+    <div class="return-to-cart-container">
+        <button onclick="returnToCart()" class="return-to-cart-button">Корзина</button>
+    </div>
+    <div class="return-to-feedback-container">
+        <button onclick="openFeedback()" class="return-to-feedback-button">Обратная связь</button>
+    </div>
+</div>
+
+<div class="toggle-btn" onclick="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+
+
+<div class="conteiner-center">
+    <!-- Строка поиска -->
+    <div class="search-container">
+        <form action="{{ url_for('news') }}" method="GET">
+            <input type="text" name="search_query" placeholder="Поиск новостей...">
+            <button type="submit">Поиск</button>
+        </form>
+    </div>
+    
+    <div class="conteiner">
+        {% for single_news in all_news %}
+            <div class="news">
+                <p class="post-author"> Автор: {{ single_news.author.username }}</p> <!-- Имя автора -->
+                <p>{{ single_news.title }}</p>
+                <p>{{ single_news.content }}</p>
+                {% if single_news.image_path %}
+                    <img class="image" src="{{ url_for('static', filename=single_news.image_path) }}" alt="News Image">
+                {% endif %}
+                {% if current_user.is_authenticated and current_user.id == single_news.user_id %}
+                    <form method="post" action="{{ url_for('delete_news', news_id=single_news.id) }}" style="display:inline">
+                        <button type="submit">Удалить</button>
+                        <a href="{{ url_for('edit_news', news_id=single_news.id) }}">Редактировать</a>
+                    </form>
+                {% endif %}
+                <form method="post" action="{{ url_for('add_comment', news_id=single_news.id) }}">
+                    <input type="text" name="content">
+                    <input type="hidden" name="news_id" value="{{ single_news.id }}">
+                    <button type="submit">Отправить комментарий</button>
+                </form>                
+                <a href="{{ url_for('comments', news_id=single_news.id) }}">Посмотреть комментарии</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="create-post-container">
+    <button id="createPostButton">Создать публикацию</button>
+</div>
+
+<!-- Контекстное меню -->
+<div id="contextMenu" style="display: none;">
+    <div class="block-cab" style="right: 5%;">
+        <div class="cabblock">
+            <form id="postForm" action="{{ url_for('add_news') }}" method="POST" enctype="multipart/form-data">
+                <label for="title">Заголовок:</label><br>
+                <input type="text" id="title" name="title"><br><br>
+                <label for="content">Содержание:</label><br>
+                <textarea id="content" name="content" rows="4" cols="50"></textarea><br><br>
+                <label class="image" for="image">Картинка:</label><br>
+                <input type="file" name="image">
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
+<script src="/static/scripts/MakePost.js"></script>
+
+</body>
+</html>

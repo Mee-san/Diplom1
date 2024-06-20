@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles/admin_panel.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sidebar.css') }}">
+    
+    <script src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <div class="top-bar">
+        <nav class="tophat">
+            <div class="Logo">
+                <div class="logo-container">
+                    <a href="{{ url_for('index') }}" class="logo-link">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+                    </a>
+                </div>
+            </div>
+            <a href="{{ url_for('admin_feedback') }}" class="admin-link">Сообщения обратной связи</a>
+        </nav>
+
+    </div> 
+    <div class="sidebar">
+        <div class="profile-container">
+            {% if current_user.is_authenticated %}
+                {% if current_user.avatar %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar" class="avatar">
+                {% else %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar" class="avatar">
+                {% endif %}
+                <span class="username">{{ current_user.username }}</span>
+            {% else %}
+                <a href="{{ url_for('login') }}">Войти</a>
+            {% endif %}
+        </div>
+
+        <div class="return-to-main-container">
+            <button onclick="returnToMainPage()" class="return-to-main-button">На главную</button>
+        </div>
+        <div class="return-to-dashboard-container">
+            <button onclick="returnToDashboard()" class="return-to-dashboard-button">Вернуться в личный кабинет</button>
+        </div>
+        <div class="return-to-genres-container">
+            <button onclick="returnToGenres()" class="return-to-genres-button">Жанры</button>
+        </div>
+        <div class="return-to-news-container">
+            <button onclick="returnToNews()" class="return-to-news-button">Форум</button>
+        </div>
+        <div class="return-to-shop-container">
+            <button onclick="returnToShop()" class="return-to-shop-button">Магазин</button>
+        </div>
+        <div class="return-to-cart-container">
+            <button onclick="returnToCart()" class="return-to-cart-button">Корзина</button>
+        </div>
+        <div class="return-to-feedback-container">
+            <button onclick="openFeedback()" class="return-to-feedback-button">Обратная связь</button>
+        </div>
+    </div>
+
+    <div class="toggle-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    
+
+
+
+    <div class="container">
+        <h1>Админ Панель</h1>
+        <div class="users-section">
+            <h2>Пользователи</h2>
+            <form method="post" action="{{ url_for('admin_panel') }}">
+                <input type="text" name="search" placeholder="Поиск пользователей">
+                <button type="submit">Искать</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Имя пользователя</th>
+                        <th>Email</th>
+                        <th>Администратор</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in random_users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ 'Да' if user.is_admin else 'Нет' }}</td>
+                        <td>
+                            <form action="{{ url_for('edit_user', user_id=user.id) }}" method="get" style="display:inline;">
+                                <button type="submit">Редактировать пользователя</button>
+                            </form>
+                            <form action="{{ url_for('delete_user', user_id=user.id) }}" method="post" style="display:inline;">
+                                <input type="submit" value="Удалить" onclick="return confirm('Вы уверены?')">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div>
+                <button onclick="toggleAllUsers()">Показать всех пользователей</button>
+            </div>
+            <div id="all-users" style="display:none;">
+                <h2>Все пользователи</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Имя пользователя</th>
+                            <th>Email</th>
+                            <th>Администратор</th>
+                            <th>Действие</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in all_users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ 'Да' if user.is_admin else 'Нет' }}</td>
+                            <td>
+                                <form action="{{ url_for('edit_user', user_id=user.id) }}" method="get" style="display:inline;">
+                                    <button type="submit">Редактировать пользователя</button>
+                                </form>
+                                <form action="{{ url_for('delete_user', user_id=user.id) }}" method="post" style="display:inline;">
+                                    <input type="submit" value="Удалить" onclick="return confirm('Вы уверены?')">
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button onclick="toggleAllUsers()">Скрыть всех пользователей</button>
+            </div>
+            <a href="{{ url_for('add_user') }}" class="add-user-button" style="margin-top: 20px;">Добавить нового пользователя</a>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="genres-section">
+            <h2>Жанры</h2>
+            <h3>Добавить новый жанр</h3>
+            <form method="post" action="{{ url_for('add_genre') }}">
+                <input type="text" name="genre_name" placeholder="Название жанра" required>
+                <button type="submit">Добавить</button>
+            </form>
+            <ul>
+                {% for genre in genres %}
+                <li>
+                    {{ genre.name }}
+                    <form action="{{ url_for('delete_genre', genre_id=genre.id) }}" method="post" style="display:inline;">
+                        <input type="submit" value="Удалить" onclick="return confirm('Вы уверены?')">
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="groups-section">
+            <h2>Группы</h2>
+            <form method="post" action="{{ url_for('admin_panel') }}">
+                <select name="genre_filter">
+                    <option value="">Все жанры</option>
+                    {% for genre in genres %}
+                    <option value="{{ genre.id }}">{{ genre.name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="text" name="search_group" placeholder="Поиск групп по названию">
+                <button type="submit">Искать</button>
+            </form>
+            <a href="{{ url_for('add_group') }}">Добавить группу</a>
+            <ul>
+                {% for group in groups %}
+                <li>
+                    <a href="{{ url_for('group_details', group_id=group.id) }}">{{ group.name }}</a>
+                    <form action="{{ url_for('delete_group', group_id=group.id) }}" method="POST" style="display:inline;">
+                        <input type="submit" value="Удалить" onclick="return confirm('Вы уверены?')">
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="news-section">
+            <h2>Публикации</h2>
+            <h2>Поиск публикаций</h2>
+            <form method="post" action="{{ url_for('admin_panel') }}">
+                <input type="text" name="search" placeholder="Поиск публикаций">
+                <button type="submit">Искать</button>
+            </form>
+            <ul>
+                {% for single_news in random_news %}
+                <li>
+                    <h3>{{ single_news.title }}</h3>
+                    <p>{{ single_news.content }}</p>
+                    <img class="image" src="{{ url_for('static', filename=single_news.image_path) }}" alt="News Image">
+
+                    <form action="{{ url_for('edit_news', news_id=single_news.id) }}" method="get" style="display:inline;">
+                        <button type="submit">Редактировать</button>
+                    </form>
+                    <form action="{{ url_for('delete_news', news_id=single_news.id) }}" method="post" style="display:inline;">
+                        <input type="submit" value="Удалить" onclick="return confirm('Вы уверены?')">
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{{ url_for('add_news') }}">Создать публикацию</a>
+            <a href="{{ url_for('manual_backup_database') }}" class="btn btn-primary">Сохранить базу данных</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Категории</h2>
+        <ul>
+            {% for category in categories %}
+            <li>
+                <a href="{{ url_for('edit_category', category_id=category.id) }}">{{ category.name }}</a>
+                <form action="{{ url_for('delete_category', category_id=category.id) }}" method="post" style="display:inline;">
+                    <input type="submit" value="Удалить" onclick="return confirm('Вы уверены?')">
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('add_category') }}">Добавить новую категорию</a>
+    </div>
+
+    <div class="container">
+        <div class="products-section">
+            <h2>Товары</h2>
+            <form method="post" action="{{ url_for('admin_panel') }}">
+                <input type="text" name="search_product" placeholder="Поиск товаров">
+                <button type="submit">Искать</button>
+            </form>
+            <a href="{{ url_for('add_product') }}" class="add-product-button">Добавить товар</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Название</th>
+                        <th>Описание</th>
+                        <th>Цена</th>
+                        <th>Категория</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.category.name }}</td>
+                        <td>
+                            <form action="{{ url_for('edit_product', product_id=product.id) }}" method="get" style="display:inline;">
+                                <button type="submit">Редактировать</button>
+                            </form>
+                            <form action="{{ url_for('delete_product', product_id=product.id) }}" method="post" style="display:inline;">
+                                <input type="submit" value="Удалить" onclick="return confirm('Вы уверены?')">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="orders-section">
+            <h2>Заказы</h2>
+            <form method="post" action="{{ url_for('admin_panel') }}">
+                <input type="text" name="search_order" placeholder="Поиск заказов по номеру">
+                <button type="submit">Искать</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Номер заказа</th>
+                        <th>Имя пользователя</th>
+                        <th>Сумма заказа</th>
+                        <th>Дата заказа</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.order_number }}</td>
+                            <td>{{ order.user.username }}</td>
+                            <td>{{ order.total_price }} руб.</td>
+                            <td>{{ order.created_at }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+            </table>
+            <div>
+                <button onclick="toggleAllOrders()">Показать все заказы</button>
+            </div>
+            <div id="all-orders" style="display:none;">
+                <h2>Все заказы</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Номер заказа</th>
+                            <th>Имя пользователя</th>
+                            <th>Сумма заказа</th>
+                            <th>Дата заказа</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.order_number }}</td>
+                            <td>{{ order.user.username }}</td>
+                            <td>{{ order.total_price }} руб.</td>
+                            <td>{{ order.created_at }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+                <button onclick="toggleAllOrders()">Скрыть все заказы</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleAllOrders() {
+            var allOrdersDiv = document.getElementById('all-orders');
+            if (allOrdersDiv.style.display === 'none') {
+                allOrdersDiv.style.display = 'block';
+            } else {
+                allOrdersDiv.style.display = 'none';
+            }
+        }
+    </script>
+    
+
+    <script>
+        function toggleAllUsers() {
+            var allUsersDiv = document.getElementById('all-users');
+            if (allUsersDiv.style.display === 'none') {
+                allUsersDiv.style.display = 'block';
+            } else {
+                allUsersDiv.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

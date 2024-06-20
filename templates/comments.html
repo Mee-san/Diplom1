@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Comments</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/comments.css') }}">
+    <style>
+        .returnbutton a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: white;
+            color: #000;
+            border: 2px solid #000;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .returnbutton a:hover {
+            background-color: #000;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="news">
+        <div class="returnbutton">
+            <a href="/news">Вернуться на форум</a>
+        </div>
+        <p class="post-author">Автор: {{ news.author.username }}</p> <!-- Имя автора -->
+        <h2>{{ news.title }}</h2>
+        <p>{{ news.content }}</p>
+
+        <div class="image-container">
+            {% if image_path %}
+            <img src="{{ url_for('static', filename=image_path) }}">
+            {% else %}
+            <a>нет картинки</a>
+            {% endif %}
+        </div>
+        <!-- Блок для оставления комментария -->
+        <div class="makecomment">
+            <form method="post" action="{{ url_for('add_comment', news_id=news.id) }}">
+                <input type="text" name="content">
+                <input type="hidden" name="news_id" value="{{ news.id }}">
+                <button type="submit">Отправить комментарий</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Блок с комментариями -->
+    <div class="comment-section">
+        <h2>Comments</h2>
+        {% for comment in comments %}
+        <div class="comment">
+            {% if comment.author.avatar %}
+            <img class="avatar" src="{{ url_for('static', filename='avatars/' + comment.author.avatar) }}" alt="Avatar">
+            {% else %}
+            <img class="avatar" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar">
+            {% endif %}
+            <p><strong>{{ comment.author.username }}</strong>: {{ comment.content }}</p>
+            {% if current_user.is_authenticated and current_user.id == comment.author.id %}
+            <form method="post" action="{{ url_for('delete_comment', comment_id=comment.id) }}">
+                <button type="submit">Удалить комментарий</button>
+            </form>
+            <form method="get" action="{{ url_for('edit_comment', comment_id=comment.id) }}">
+                <button type="submit">Редактировать комментарий</button>
+            </form>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

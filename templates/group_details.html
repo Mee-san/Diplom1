@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/bandinfo.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sidebar.css') }}">
+    
+    <script src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
+    <title>{{ group.name }}</title>
+</head>
+
+<script>
+    function toggleAudioForm() {
+        var audioForm = document.getElementById('audioForm');
+        if (audioForm.style.display === 'none') {
+            audioForm.style.display = 'block';
+        } else {
+            audioForm.style.display = 'none';
+        }
+    }
+</script>
+
+<style>
+.btn {
+    display: inline-block;
+    padding: 15px 30px; /* Увеличенные отступы */
+    margin: 20px 10px;  /* Увеличенные отступы */
+    font-size: 18px;    /* Увеличенный размер шрифта */
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Стили для кнопки "Добавить статью" */
+.add-article-btn {
+    background-color: #eb065e; /* синий */
+}
+
+.add-article-btn:hover {
+    background-color: #0056b3; /* темнее синий */
+}
+
+/* Стили для кнопки "Назад к панели администратора" */
+.back-to-admin-panel-btn {
+    background-color: #eb065e; /* синий */
+}
+
+.back-to-admin-panel-btn:hover {
+    background-color: #0056b3; /* темнее синий */
+}
+
+/* Стили для контейнера кнопок */
+.button-container {
+    display: flex;
+    justify-content: center; /* Выравнивание по центру */
+    margin: 20px 0;          /* Отступы сверху и снизу */
+}
+
+</style>
+
+<body>
+    <div class="top-bar">
+        <nav class="tophat">
+            <div class="Line"></div>
+        </nav>
+    </div>
+
+    <a href="{{ url_for('genres') }}" class="btn add-article-btn">Вернутся к жанрам</a>
+    <a href="{{ url_for('add_article', group_id=group.id) }}" class="btn add-article-btn">Добавить статью</a>
+    <a href="{{ url_for('admin_panel') }}" class="btn back-to-admin-panel-btn">Назад к панели администратора</a>
+        
+    <div class="sidebar">
+        <div class="profile-container">
+            {% if current_user.is_authenticated %}
+                {% if current_user.avatar %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar" class="avatar">
+                {% else %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar" class="avatar">
+                {% endif %}
+                <span class="username">{{ current_user.username }}</span>
+            {% else %}
+                <a href="{{ url_for('login') }}">Войти</a>
+            {% endif %}
+        </div>
+
+        <div class="return-to-main-container">
+            <button onclick="returnToMainPage()" class="return-to-main-button">На главную</button>
+        </div>
+        <div class="return-to-dashboard-container">
+            <button onclick="returnToDashboard()" class="return-to-dashboard-button">Вернуться в личный кабинет</button>
+        </div>
+        <div class="return-to-genres-container">
+            <button onclick="returnToGenres()" class="return-to-genres-button">Жанры</button>
+        </div>
+        <div class="return-to-news-container">
+            <button onclick="returnToNews()" class="return-to-news-button">Форум</button>
+        </div>
+        <div class="return-to-shop-container">
+            <button onclick="returnToShop()" class="return-to-shop-button">Магазин</button>
+        </div>
+    
+        <div class="return-to-cart-container">
+          <button onclick="returnToCart()" class="return-to-cart-button">Корзина</button>
+      </div>
+    
+        <div class="return-to-feedback-container">
+            <button onclick="openFeedback()" class="return-to-feedback-button">Обратная связь</button>
+        </div>
+    
+    </div>
+
+    
+    
+    <div class="toggle-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="conteiner-center">
+        <div class="conteiner">
+            <h1>{{ group.name }}</h1>
+            <img src="{{ url_for('static', filename=group.image_path) }}" alt="{{ group.name }}">
+            <p>{{ group.description }}</p>
+        </div>
+    </div>
+
+    <div class="conteiner-center">
+        <div class="conteiner">
+            <ul class="article-list">
+                {% for article in group.articles %}
+                <li class="article-item">
+                    <h3>{{ article.title }}</h3>
+                    <div class="article-content">
+                        {% if article.image_path %}
+                        <img src="{{ url_for('static', filename=article.image_path) }}" alt="Article Image">
+                        {% endif %}
+                        {{ article.content }}
+                    </div>
+                    <div class="article-controls">
+                        <a href="{{ url_for('edit_article', group_id=group.id, article_id=article.id) }}">Редактировать</a>
+                        <form action="{{ url_for('delete_article', group_id=group.id, article_id=article.id) }}" method="POST" style="display:inline;">
+                            <input type="submit" value="Удалить" onclick="return confirm('Вы уверены?')">
+                        </form>
+                    </div>
+                </li>
+                {% endfor %}
+                
+            </ul>
+        </div>
+    </div>
+    
+</body>
+
+</html>

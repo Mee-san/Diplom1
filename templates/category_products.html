@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/products.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sidebar.css') }}">
+    
+    <script src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <nav class="tophat">
+                <div class="Line"></div>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="sidebar">
+        <div class="profile-container">
+            {% if current_user.is_authenticated %}
+                {% if current_user.avatar %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar">
+                {% else %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar">
+                {% endif %}
+                <span class="username">{{ current_user.username }}</span>
+            {% else %}
+                <a href="{{ url_for('login') }}">Войти</a>
+            {% endif %}
+        </div>
+        
+        <div class="return-to-main-container">
+            <button onclick="returnToMainPage()" class="return-to-main-button">На главную</button>
+        </div>
+        <div class="return-to-dashboard-container">
+            <button onclick="returnToDashboard()" class="return-to-dashboard-button">Вернуться в личный кабинет</button>
+        </div>
+        <div class="return-to-genres-container">
+            <button onclick="returnToGenres()" class="return-to-genres-button">Жанры</button>
+        </div>
+        <div class="return-to-news-container">
+            <button onclick="returnToNews()" class="return-to-news-button">Форум</button>
+        </div>
+        <div class="return-to-shop-container">
+            <button onclick="returnToShop()" class="return-to-shop-button">Магазин</button>
+        </div>
+    
+        <div class="return-to-cart-container">
+          <button onclick="returnToCart()" class="return-to-cart-button">Корзина</button>
+      </div>
+    
+        <div class="return-to-feedback-container">
+            <button onclick="openFeedback()" class="return-to-feedback-button">Обратная связь</button>
+        </div>
+    </div>
+    
+    <div class="toggle-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <main>
+        <h1>Товары в категории "{{ category.name }}"</h1>
+        <div class="search-container">
+            <form action="{{ url_for('search_products') }}" method="GET">
+                <input type="text" name="search_query" placeholder="Поиск товаров...">
+                <button type="submit">Поиск</button>
+            </form>
+        </div>
+        
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product-card">
+                    <a href="{{ url_for('product_details', product_id=product.id) }}">
+                        <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.name }}" class="product-image">
+                        <div class="product-info">
+                            <h2 class="product-name">{{ product.name }}</h2>
+                            <p class="product-price">{{ product.price }} руб.</p>
+                        </div>
+                    </a>
+                    <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post" class="add-to-cart-form">
+                        <div class="quantity-container">
+                            <label for="quantity{{ product.id }}">Количество:</label>
+                            <input type="number" id="quantity{{ product.id }}" name="quantity" value="1" min="1" required>
+                        </div>
+                        <button type="submit" class="add-to-cart-button">Добавить в корзину</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+</body>
+</html>

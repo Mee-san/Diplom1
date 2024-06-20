@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Category</title>
+</head>
+<body>
+    <h1>Edit Category</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="name">Название категории</label>
+        <input type="text" name="name" id="name" value="{{ category.name }}" required>
+        <label for="image">Изображение категории</label>
+        <input type="file" name="image" id="image" accept="image/*">
+        {% if category.image_path %}
+            <img src="{{ url_for('static', filename=category.image_path) }}" alt="Category Image" style="max-width: 200px;">
+        {% else %}
+            <p>No image uploaded</p>
+        {% endif %}
+        <button type="submit">Сохранить</button>
+    </form> 
+</body>
+</html>

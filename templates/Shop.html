@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Магазин</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/shop.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sidebar.css') }}">
+    
+    <script src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
+</head>
+<body>
+    <div class="top-bar">
+        <nav class="tophat">
+            <div class="Logo">
+                <div class="logo-container">
+                    <a href="{{ url_for('index') }}" class="logo-link">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+                    </a>
+                </div>
+            </div>
+            {% if current_user.is_admin %}
+                <div class="admin-buttons">
+                    <a href="{{ url_for('add_category') }}" class="add-button">Добавить категорию</a>
+                    <a href="{{ url_for('add_product') }}" class="add-button">Добавить товар</a>
+                </div>
+            {% endif %}
+        </nav>
+    </div>
+    <div class="sidebar">
+        <div class="profile-container">
+            {% if current_user.is_authenticated %}
+                {% if current_user.avatar %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar" class="avatar">
+                {% else %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar" class="avatar">
+                {% endif %}
+                <span class="username">{{ current_user.username }}</span>
+            {% else %}
+                <a href="{{ url_for('login') }}">Войти</a>
+            {% endif %}
+        </div>
+
+        <div class="return-to-main-container">
+            <button onclick="returnToMainPage()" class="return-to-main-button">На главную</button>
+        </div>
+        <div class="return-to-dashboard-container">
+            <button onclick="returnToDashboard()" class="return-to-dashboard-button">Вернуться в личный кабинет</button>
+        </div>
+        <div class="return-to-genres-container">
+            <button onclick="returnToGenres()" class="return-to-genres-button">Жанры</button>
+        </div>
+        <div class="return-to-news-container">
+            <button onclick="returnToNews()" class="return-to-news-button">Форум</button>
+        </div>
+        <div class="return-to-shop-container">
+            <button onclick="returnToShop()" class="return-to-shop-button">Магазин</button>
+        </div>
+    
+        <div class="return-to-cart-container">
+          <button onclick="returnToCart()" class="return-to-cart-button">Корзина</button>
+      </div>
+    
+        <div class="return-to-feedback-container">
+            <button onclick="openFeedback()" class="return-to-feedback-button">Обратная связь</button>
+        </div>
+    
+    </div>
+
+    
+    
+    <div class="toggle-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <h1>Категории товаров</h1>
+    <div class="categories-container">
+        {% for category in categories %}
+        <div class="category-panel">
+            <a href="{{ url_for('category_products', category_id=category.id) }}">
+                {% if category.image_path %}
+                    <img class="category-image" src="{{ url_for('static', filename=category.image_path) }}" alt="{{ category.name }}">
+                {% else %}
+                    <div class="category-placeholder"></div>
+                {% endif %}
+                <div class="category-overlay">
+                    <span class="category-name">{{ category.name }}</span>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>

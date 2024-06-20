@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Личный кабинет</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/account.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/sidebar.css') }}">
+  
+</head>
+
+<body>
+  <body>
+    <div class="toggle-btn" onclick="toggleSidebar()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  
+    <div class="sidebar">
+      <div class="profile-container">
+          {% if current_user.is_authenticated %}
+              {% if current_user.avatar %}
+                  <img class="profile-image" src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar" class="avatar">
+              {% else %}
+                  <img class="profile-image" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar" class="avatar">
+              {% endif %}
+              <span class="username">{{ current_user.username }}</span>
+          {% else %}
+              <a href="{{ url_for('login') }}">Войти</a>
+          {% endif %}
+      </div>
+      
+      <div class="return-to-main-container">
+          <button onclick="returnToMainPage()" class="return-to-main-button">На главную</button>
+      </div>
+      <div class="return-to-dashboard-container">
+          <button onclick="returnToDashboard()" class="return-to-dashboard-button">Вернуться в личный кабинет</button>
+      </div>
+      <div class="return-to-genres-container">
+          <button onclick="returnToGenres()" class="return-to-genres-button">Жанры</button>
+      </div>
+      <div class="return-to-news-container">
+          <button onclick="returnToNews()" class="return-to-news-button">Форум</button>
+      </div>
+      <div class="return-to-shop-container">
+          <button onclick="returnToShop()" class="return-to-shop-button">Магазин</button>
+      </div>
+  
+      <div class="return-to-cart-container">
+        <button onclick="returnToCart()" class="return-to-cart-button">Корзина</button>
+    </div>
+  
+      <div class="return-to-feedback-container">
+          <button onclick="openFeedback()" class="return-to-feedback-button">Обратная связь</button>
+      </div>
+  </div>
+
+  <div class="top-bar">
+    <nav class="tophat">
+      <div class="Line"></div>
+    </nav>
+  </div>
+
+  <button onclick="toggleSidebar()">Toggle Sidebar</button>
+
+  <div class="content">
+    <h1>Личный кабинет</h1>
+    <div class="avatar-container">
+      {% if avatar %}
+      <img src="{{ url_for('static', filename='avatars/' + avatar) }}" alt="Аватарка" class="avatar" />
+      {% endif %}
+    </div>    
+    <div class="user-info">
+      
+    </div>
+    <form action="/update_avatar" method="post" enctype="multipart/form-data" class="avatar-form">
+      <label for="avatar">Выберите файл для загрузки аватара:</label><br>
+      <input type="file" id="avatar" name="avatar" accept="image/*" class="upload-avatar-button">
+      <input type="submit" value="Загрузить аватар" class="upload-avatar-button">
+    </form>
+    <p>Добро пожаловать, {{ username }}! Твой ID: {{ user_id }}</p>
+      <a href="{{ url_for('change_username') }}" class="admin-panel-button">Изменить имя пользователя</a>
+    {% if current_user.is_admin %}
+    <a href="/admin_panel" class="admin-panel-button">Админ Панель</a>
+    {% endif %}
+    <a href="/logout" class="logout-button">Выйти</a>
+  </div>
+
+  <script src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
+</body>
+
+</html>

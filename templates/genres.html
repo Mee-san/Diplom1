@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles/genres.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/sidebar.css') }}">
+    <script src="{{ url_for('static', filename='scripts/sidebar.js') }}"></script>
+    <title>Список жанров</title>
+</head>
+
+<style>
+    .btn {
+        display: inline-block;
+        padding: 15px 30px; /* Увеличенные отступы */
+        margin: 20px 10px;  /* Увеличенные отступы */
+        font-size: 18px;    /* Увеличенный размер шрифта */
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    
+    /* Стили для кнопки "Назад к панели администратора" */
+    .back-to-admin-panel-btn {
+        background-color: #eb065e; /* синий */
+    }
+    
+    .back-to-admin-panel-btn:hover {
+        background-color: #0056b3; /* темнее синий */
+    }
+    
+    /* Стили для контейнера кнопок */
+    .button-container {
+        display: flex;
+        justify-content: center; /* Выравнивание по центру */
+        margin: 20px 0;          /* Отступы сверху и снизу */
+    }
+
+</style>
+
+<body>
+    <header>
+
+        <div class="top-bar">
+            <nav class="tophat">
+                <div class="Line"></div>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <div class="sidebar">
+        <div class="profile-container">
+            {% if current_user.is_authenticated %}
+                {% if current_user.avatar %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar" class="avatar">
+                {% else %}
+                    <img class="profile-image" src="{{ url_for('static', filename='avatars/default.jpg') }}" alt="Default Avatar" class="avatar">
+                {% endif %}
+                <span class="username">{{ current_user.username }}</span>
+            {% else %}
+                <a href="{{ url_for('login') }}">Войти</a>
+            {% endif %}
+        </div>
+        
+        <div class="return-to-main-container">
+            <button onclick="returnToMainPage()" class="return-to-main-button">На главную</button>
+        </div>
+        <div class="return-to-dashboard-container">
+            <button onclick="returnToDashboard()" class="return-to-dashboard-button">Вернуться в личный кабинет</button>
+        </div>
+        <div class="return-to-genres-container">
+            <button onclick="returnToGenres()" class="return-to-genres-button">Жанры</button>
+        </div>
+        <div class="return-to-news-container">
+            <button onclick="returnToNews()" class="return-to-news-button">Форум</button>
+        </div>
+        <div class="return-to-shop-container">
+            <button onclick="returnToShop()" class="return-to-shop-button">Магазин</button>
+        </div>
+    
+        <div class="return-to-cart-container">
+          <button onclick="returnToCart()" class="return-to-cart-button">Корзина</button>
+      </div>
+    
+        <div class="return-to-feedback-container">
+            <button onclick="openFeedback()" class="return-to-feedback-button">Обратная связь</button>
+        </div>
+    </div>
+    <div class="toggle-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+
+    <div class="conteiner-center">
+        
+        {% if current_user.is_admin %}
+        <form method="post" action="{{ url_for('add_genre') }}">
+            <input type="text" name="genre_name" placeholder="Название жанра" required>
+            <button type="submit">Добавить</button>
+        </form>
+        {% endif %}
+
+        
+        <div class="conteiner">
+            <div class="genre">
+            <p>Список жанров</p>
+            <div class="admin-buttons">
+                <div class="search-container">
+                    <form method="post" action="{{ url_for('search_genres') }}">
+                        <input type="text" name="search_genre" placeholder="Поиск жанров">
+                        <button type="submit">Искать</button>
+                    </form>
+                </div>
+            </div>
+            <ul>
+                {% for genre in genres %}
+                <li><a href="{{ url_for('genre', genre_id=genre.id) }}">{{ genre.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    </div>
+
+
+</body>
+</html>
